@@ -122,7 +122,7 @@ const ThemedMLDashboard = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("http://127.0.0.1:8000/upload", formData);
+      const res = await axios.post("https://ml-chatbot-backend.onrender.com/upload", formData);
       setResponse(res.data);
       showToast("File uploaded successfully!", "success");
     } catch (err) {
@@ -144,7 +144,7 @@ const ThemedMLDashboard = () => {
     formData.append("model_name", modelName);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/train", formData);
+      const res = await axios.post("https://ml-chatbot-backend.onrender.com/train", formData);
       setTrainResult(res.data);
       setSelectedModel(res.data.model);
       showToast(`${res.data.model} trained successfully!`, "success");
@@ -165,7 +165,7 @@ const ThemedMLDashboard = () => {
     formData.append("file", file);
     formData.append("target_column", targetColumn);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/train_all", formData);
+      const res = await axios.post("https://ml-chatbot-backend.onrender.com/train_all", formData);
       setTrainAllResult(res.data);
       setSelectedModel(res.data.best_model);
       showToast(`Best model (${res.data.best_model}) found and trained!`, "success");
@@ -183,7 +183,7 @@ const ThemedMLDashboard = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.get("http://127.0.0.1:8000/get_input_features", {
+      const res = await axios.get("https://ml-chatbot-backend.onrender.com/get_input_features", {
         params: { model_name: selectedModel },
       });
       setInputFeatures(res.data.features || []);
@@ -250,7 +250,7 @@ const ThemedMLDashboard = () => {
       }
       
       // Use the /predict endpoint for both file and manual predictions
-      const res = await axios.post("http://127.0.0.1:8000/predict", formData);
+      const res = await axios.post("https://ml-chatbot-backend.onrender.com/predict", formData);
       setPrediction(res.data);
       showToast("Prediction successful!", "success");
 
